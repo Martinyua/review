@@ -1,8 +1,8 @@
 /*
  * @Author: Martin
  * @Date: 2020-10-09 23:23:34
- * @LastEditTime: 2020-10-09 23:23:54
- * @FilePath: \Daily_question\src\o_6.js
+ * @LastEditTime: 2020-10-09 23:27:43
+ * @FilePath: \undefinedc:\Users\Lenovo\Desktop\Daily_question\src\o_6.js
  */
 // 1. 使用一个数组 res保存结果
 // 2. 使用 while 循环遍历链表
@@ -10,6 +10,7 @@
 
 var reversePrint = function(head) {
   const res = []
+   
   
   while(head !== null) {
     res.unshift(head.val)
