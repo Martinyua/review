@@ -1,7 +1,7 @@
 /*
  * @Author: Martin
  * @Date: 2020-10-16 22:58:58
- * @LastEditTime: 2020-10-16 22:59:36
+ * @LastEditTime: 2020-10-24 23:08:21
  * @FilePath: \Daily_question\src\算法相关\LeetCode_257.js
  */
 /**
@@ -19,17 +19,17 @@
  * 还需要访问每一个节点后把它从path中删除。
  */
 var binaryTreePaths = function (root) {
-    let path = [];
-    let res = [];
-    let dfs = (node) => {
-      if (node == null) return;
-      path.push(node);
-      dfs(node.left);
-      dfs(node.right);
-      if (!node.left && !node.right)
-        res.push(path.map(item => item.val).join('->'));
-      path.pop();
-    }
-    dfs(root);
-    return res;
-  };
+  let path = [];
+  let res = [];
+  let dfs = (node) => {
+    if (node == null) return;
+    path.push(node);
+    dfs(node.left);
+    dfs(node.right);
+    if (!node.left && !node.right)
+      res.push(path.map(item => item.val).join('->'));
+    path.pop();
+  }
+  dfs(root);
+  return res;
+};
