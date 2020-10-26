@@ -1,7 +1,7 @@
 /*
  * @Author: Martin
  * @Date: 2020-10-26 22:54:42
- * @LastEditTime: 2020-10-26 23:11:34
+ * @LastEditTime: 2020-10-26 23:17:10
  * @FilePath: \Daily_question\src\算法相关\leetCode_680.js
  */
 /**
@@ -13,12 +13,13 @@
 var validPalindrome = function (s) {
     let l = 0, r = s.length - 1
     while (l < r) {
-        if ([l] != s[r]) {
-            return isPli(s,l++,r) || isPli(s,l,r--)
+        if (s[l] != s[r]) {
+            return isPli(s,l+1,r) || isPli(s,l,r-1)
         }
-        r++
-        l--
+        l++
+        r--
     }
+    return true
 };
 function isPli(s, l, r) {
     while (l < r) {
@@ -28,5 +29,5 @@ function isPli(s, l, r) {
         l++
         r--
     }
-    return false
+    return true
 }
