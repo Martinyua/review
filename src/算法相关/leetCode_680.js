@@ -1,7 +1,7 @@
 /*
  * @Author: Martin
  * @Date: 2020-10-26 22:54:42
- * @LastEditTime: 2020-10-26 23:17:10
+ * @LastEditTime: 2020-10-27 22:52:32
  * @FilePath: \Daily_question\src\算法相关\leetCode_680.js
  */
 /**
@@ -14,7 +14,7 @@ var validPalindrome = function (s) {
     let l = 0, r = s.length - 1
     while (l < r) {
         if (s[l] != s[r]) {
-            return isPli(s,l+1,r) || isPli(s,l,r-1)
+            return isPli(s, l + 1, r) || isPli(s, l, r - 1)
         }
         l++
         r--
@@ -31,3 +31,25 @@ function isPli(s, l, r) {
     }
     return true
 }
+
+// var validPalindrome = function (s) {
+//     let l = 0
+//     let r = s.length - 1
+//     while (l < r) {
+//         if (s[r] != s[l]) {
+//             return isPli(s, l++, r) || isPli(s, l, r--)
+//         }
+//     }
+//     l++
+//     r--
+// }
+// var isPli = function (s, l, r) {
+//     while(l < r){
+//         if(s[r] !=s[l]){
+//             return false
+//         }
+//         l--
+//         r++
+//     }
+//     return true
+// }
