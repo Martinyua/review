@@ -139,6 +139,7 @@
 * constructor有原型指回构造函数
 * **原型的原型**。原型也是一个对象，所有也有原型。
 * 通过__ proto __相互关联起来的原型组成的链状结构就是原型链
+* ![原型链示例](./src/assets/原型链.png)
 * ![原型链示意图](./src/assets/prototype5.png)
 * ![img](https://upload-images.jianshu.io/upload_images/574093-c03529e3f0943633.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/570/format/webp)
 
@@ -240,3 +241,310 @@
   * 异步不会阻塞代码的执行
   * 同步会阻塞代码的执行
 * Promise并不是避免了回调函数。而是把回调函数变成了串联的形式。
+
+### DOM
+
+- DOM的本质是从html语言解析出来的树型结构
+
+- dom节点操作
+
+  - 获取dom节点
+
+    - document.getElementById('id') //元素
+    - getElemenstByTagName('div') //集合
+    - getElementsByClassName() //集合
+    - querySelectorAll()
+
+  - property 
+
+    - style
+    - classname
+    - nodeType
+    - nodeName
+
+  - attribute //设置一个标签的属性
+
+    - setAttribute('key','value')
+    - getAttribute('key')
+
+  - 区别：property修改对象属性，不会体现到html中，attribute修改html属性，会改变html属性。两者都可能引起dom重新渲染
+
+  - 新建节点
+
+    - createElement('')
+
+  - 插入新节点
+
+    - appendChild()
+
+  - 获取父元素
+
+    - p1.parentNode
+
+  - 获取子元素
+
+    - childNodes
+
+  - 删除节点
+
+    - const  child = div1.childNodes
+
+      div1.removeChild(child[0])
+
+- DOM性能
+
+  - 避免频繁操作dom
+
+  - 对DOM查询做缓存。比如每次for循环都要查询dom的长度，可先计算dom的长度，而不是在for语句中查询dom长度
+
+  - 将频繁操作改为一次性操作 
+
+    - 创建一个文档片段，先插入到文档片段中，不在for循环中插入到dom树中，**document.createDocumentFragment()**
+
+      ```js
+      const list = document.getElementById('list')
+      
+      // 创建一个文档片段，此时还没有插入到 DOM 结构中
+      const frag = document.createDocumentFragment()
+      
+      for (let i  = 0; i < 20; i++) {
+          const li = document.createElement('li')
+          li.innerHTML = `List item ${i}`
+      
+          // 先插入文档片段中
+          frag.appendChild(li)
+      }
+      
+      // 都完成之后，再统一插入到 DOM 结构中
+      list.appendChild(frag)
+      
+      console.log(list)
+      ```
+
+      
+
+### BOM
+
+- navigator
+
+  - navigator.userAgent 拿到浏览器信息
+
+    ```
+    navigator.userAgent.indexof('Chrome') //返回Boolean。判断是否是chrome
+    ```
+
+    
+
+- screen 屏幕相关属性
+
+  - screen.height,screen.width
+
+- location 地址相关属性
+
+  - location.href //整个url
+  - location.protocol //协议
+  - location.pathname
+  - location.search //?后的内容
+  - locaton.hash //#后的内容
+
+- history 
+
+### 事件
+
+- 题目
+  - 编写一个通用的事件监听函数
+  - 描述事件冒泡流程
+  - 无限下拉的图片列表，如何监听每个图片的点击
+- **事件绑定**
+  - addEventListener('click', e => { do something...}) //e为事件对象,e.target可以获取触发的元素
+    - **第三个参数**：第三个参数默认值是false，表示在**事件冒泡**阶段调用事件处理函数;如果参数为true，则表示在**事件捕获**阶段调用处理函数。
+  - event.preventDefault() //阻止默认行为
+- **事件冒泡**
+  - 事件会从最内层的元素开始发生，一直向上传播，直到document对象，在此期间都可以监听到事件
+  - react中子元素的onClick事件如果不阻止，也会触发父元素的onClick事件
+- **事件捕获**
+  - 和事件冒泡的顺序相反
+- **事件代理（委托）**
+  - 把一个或者一组元素的事件委托到它的父层或者更外层元素上，真正绑定事件的是外层元素，利用事件冒泡来处理
+  - 代码简介
+  - 减少浏览器内存占用
+
+### ajax
+
+- 题目
+
+  - 手写一个简易的ajax 
+  - 跨域的常用方式
+
+- XMLHttpRequest
+
+  ```js
+  const xhr = new XMLHttpRequest
+  xhr.open('GET', 'https://www.baidu.com')
+  xhr.onreadystatechange = function () {
+      if (xhr.readyState === 4) {
+          if (xhr.status === 200) {
+              console.log(xhr.responseText)
+          }
+      }
+  }
+  
+  xhr.send(null)
+  ```
+
+  
+
+- 状态码
+
+  - readyState
+    - 0 － （未初始化）还没有调用send()方法
+    - 1 － （载入）已调用send()方法，正在发送请求
+    - 2 － （载入完成）send()方法执行完成，已经接收到全部响应内容
+    - 3 － （交互）正在解析响应内容
+    - 4 － （完成）响应内容解析完成，可以在客户端调用了
+  - xhr.status
+    - 2xx - 表示成功处理请求 ，如200
+    - 3xx - 表示需要重定向，浏览器直接跳转 如301 302 304
+    - 4xx - 客户端请求错误 ，如403 404
+    - 5xx - 服务端错误 如500 
+
+### 跨域
+
+- 同源策略：同源：协议，端口，域名三者必须一致
+
+- **jsonp跨域：**
+
+  - 浏览器要求当前网页和server必须同源 ，加载css，js可以无视同源策略如，<img scr = "xxx" />,<link href = ''/>,<script scr=''/>
+
+  - 同样script可以实现jsonp，服务端可以任意动态拼接数据返回，需要服务端配合，但是只能get请求
+
+  - Step1: 创建 callback 方法
+
+    Step2: 插入 script 标签
+
+    Step3: 后台接受到请求，解析前端传过去的 callback 方法，返回该方法的调用，并且数据作为参数传入该方法
+
+    Step4: 前端执行服务端返回的方法调用
+
+  - script中预先定义函数，再通过通过下个script中返回的触发回调函数
+
+    ```html
+    <script>
+    	window.callback = function(data){
+            console.log(data)
+    	}
+    <script/>
+    <script scr = 'https://xxx.com/xxx.js'>
+    <script/>
+    //xxx.js
+     callback({a:'xxx'})
+    ```
+
+- CORS跨域-服务器设置http header
+
+  - ```js
+    app.use((req, res, next) => {
+        res.setHeader('Access-Control-Allow-Origin', 'XXX'); //允许跨域的url
+        res.setHeader('Access-Control-Allow-Headers', 'XXX'); //允许返回的头
+        res.setHeader('Access-Control-Allow-Methods', 'XXX');//允许使用put方法请求接口
+        res.setHeader('Access-Control-Max-Age', 6); //预检的存活时间
+        if(req.method === "OPTIONS") {
+            res.end(); //如果method是OPTIONS，不做处理
+        }
+    });
+    ```
+
+- nginx反向代理
+
+  - ```nginx
+    location / {
+     add_header Access-Control-Allow-Origin *;
+     add_header Access-Control-Allow-Methods 'GET, POST, OPTIONS';
+     add_header Access-Control-Allow-Headers 'DNT,X-Mx-ReqToken,Keep-Alive,User-Agent,XRequested-With,If-Modified-Since,Cache-Control,Content-Type,Authorization';
+     if ($request_method = 'OPTIONS') {
+     return 204;
+     }
+    }
+    ```
+
+- websocket
+
+  - Websocket 是 HTML5 的一个持久化的协议，它实现了浏览器与服务器的全双工通信，同时也是跨域的一种解决方案。Websocket 不受同源策略影响，只要服务器端支持，无需任何配置就支持跨域。
+
+- postMessage
+
+  - postMessage 通过用作前端页面之前的跨域，如父页面与iframe页面的跨域。window.postMessage方法，允许跨窗口通信，不论这两个窗口是否同源。
+
+- 参考[跨域](https://github.com/YvetteLau/Blog/issues/21)
+
+- 手写简易ajax
+
+  ```js
+  // const xhr = new XMLHttpRequest
+  // xhr.open('GET', 'https://www.baidu.com')
+  // xhr.onreadystatechange = function () {
+  //     if (xhr.readyState === 4) {
+  //         if (xhr.status === 200) {
+  //             console.log(xhr.responseText)
+  //         }
+  //     }
+  // }
+  
+  // xhr.send(null)
+  
+  function ajax(url) {
+      const p = new Promise((resolve, reject) => {
+          const xhr = new XMLHttpRequest()
+          xhr.open('GET', url, true)
+          xhr.onreadystatechange = function () {
+              if (xhr.readyState === 4) {
+                  if (xhr.status === 200) {
+                      resolve(xhr.responseText)
+                  } else if (xhr.status === 404) {
+                      reject('404 NOT FOUND')
+                  } else {
+                      reject('NETWORK ERROR')
+                  }
+              }
+          }
+          xhr.send(null)
+      })
+      return p
+  }
+  
+  let res = ajax('https://www.baidu.com')
+  res.then(res2 => {
+      console.log(res2)
+  })
+  ```
+
+- fetch
+
+  - `fetch()` 返回的 Promise **不会被标记为 reject，** 即使响应的 HTTP 状态码是 404 或 500
+
+  - fetch()可以接受跨域cookies
+
+  - fetch()不会发送cookies
+
+  - 简易的fetch()
+
+    ```js
+    fetch('http://example.com/movies.json')
+      .then(function(response) {
+        return response.json();
+      })
+      .then(function(myJson) {
+        console.log(myJson);
+      });
+    ```
+
+### 浏览器储存
+
+- cookie
+  - 本身用于浏览器和server的通讯
+  - 被'借用'到本地存储
+  - 服务端也可以修改cookie
+  - 前端通过document.cookie = 'xxx' 修改cookie
+- localStorage
+- sessionStorage
+
