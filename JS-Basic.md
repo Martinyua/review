@@ -545,6 +545,16 @@
   - 被'借用'到本地存储
   - 服务端也可以修改cookie
   - 前端通过document.cookie = 'xxx' 修改cookie
+
 - localStorage
+
+  - 是HTML5提供两种在客户端存储资料的方法，已经解决了cookie存储量小，无法使用的大量资料本地存储的问题。
+
 - sessionStorage
+
+  - 从字面的意思就可以裁剪，sessionStorage将资料储存在session中，浏览器关闭也就没了；而localStorage则一直将数据存储在客户端本地；无论是sessionStorage，还是localStorage，可使用的API都相同。
+
+  - 都是使用键/值对的方式给值或取值
+  - 大小预设有5mb
+  - 每次要求不会带上
 
