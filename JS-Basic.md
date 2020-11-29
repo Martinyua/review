@@ -545,23 +545,24 @@
   - 被'借用'到本地存储
   - 服务端也可以修改cookie
   - 前端通过document.cookie = 'xxx' 修改cookie
-
 - localStorage
 
   - 是HTML5提供两种在客户端存储资料的方法，已经解决了cookie存储量小，无法使用的大量资料本地存储的问题。
-
 - sessionStorage
 
   - 从字面的意思就可以裁剪，sessionStorage将资料储存在session中，浏览器关闭也就没了；而localStorage则一直将数据存储在客户端本地；无论是sessionStorage，还是localStorage，可使用的API都相同。
   - 都是使用键/值对的方式给值或取值
   - 大小预设有5mb
   - 每次要求不会带上
-
 - 为什么要使用这个技术栈，对比其他的技术，有什么优势，自己的取舍
-
 - 项目优化，白屏问题 ，用户体验问题，错误处理 ，服务端渲染，权限路由设计，骨架屏
-
 - 发现问题  调研问题  找到解决方案 融合自己的想法 落地
 
-  
+  - new操作进行的步骤
+  - call & bind & apply
+  - caller / callee
+  - 柯里化(**尾递归优化**) & 函数式编程
+  - 类数组
+  - isNaN() 和 Number.isNaN()
+  - Obejct.is() 的不符直觉的处理（扩展：React的`ShallowEqual`底层对Object.is()进行了优化, 见[shallowEqual.js](https://github.com/facebook/react/blob/a9b035b0c2b8235405835beca0c4db2cc37f18d0/packages/shared/shallowEqual.js)）
 
