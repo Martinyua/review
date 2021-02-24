@@ -133,14 +133,15 @@
 
 > 那什么是原型呢？你可以这样理解：每一个JavaScript对象(null除外)在创建的时候就会与之关联另一个对象，这个对象就是我们所说的原型，每一个对象都会从原型"继承"属性。
 
-* 每个对象都有一个__ proto __属性，该属性指向该对象的原型
-* 每个函数（类）都有一个 prototype 属性，函数的 prototype 属性指向了一个对象，
+* 每个**对象**都有一个__ proto __（隐式原型）属性，该属性指向该对象的原型
+* 每个**函数**（类）都有一个 prototype（显式原型） 属性，函数的 prototype 属性指向了一个对象，
 * 函数的 prototype 属性指向了一个对象，这个对象正是调用该构造函数而创建的**实例**的原型
 * constructor有原型指回构造函数
-* **原型的原型**。原型也是一个对象，所有也有原型。
+* 总结：**构造函数的 prototype 指向原型对象，原型对象有一个 constructor 属性指回构造函数，每个构造函数生成的实例对象都有一个 *proto* 属性，这个属性指向原型对象。**
+* **原型的原型**。原型也是一个对象，所有也有原型。它的隐式原型(__ proto __)最终指向Object.prototype。Object.prototype的隐式原型指向null
 * 通过__ proto __相互关联起来的原型组成的链状结构就是原型链
-* ![原型链示例](./src/assets/原型链.png)
-* ![原型链示意图](./src/assets/prototype5.png)
+* ![原型链示例](./assets/原型链.png)
+* ![原型链示意图](./assets/prototype5.png)
 * ![img](https://upload-images.jianshu.io/upload_images/574093-c03529e3f0943633.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/570/format/webp)
 
 ### 作用域和自由变量
