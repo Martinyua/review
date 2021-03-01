@@ -1,8 +1,8 @@
 /*
  * @Author: Martin
  * @Date: 2020-10-11 09:02:47
- * @LastEditTime: 2021-02-28 22:11:46
- * @FilePath: \算法相关\leetCode_141.js
+ * @LastEditTime: 2020-10-11 09:11:46
+ * @FilePath: \Daily_question\src\算法相关\leetCode_141.js
  */
 /** 
  * 题目：判断链表是否有环
@@ -17,7 +17,7 @@ var hasCycle = function (head) {
     while (p1 && p2 && p2.next) {
         p1 = p1.next;
         p2 = p2.next.next;
-        if (p1 === p2) {
+        if (p1 = p2) {
             return true;
         }
     }
