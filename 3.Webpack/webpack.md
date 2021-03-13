@@ -191,6 +191,14 @@ tree shaking 是一个术语，通常用于描述移除 JavaScript 上下文中�
 
 #### 热更新原理
 
+> **大概流程是我们用webpack-dev-server启动一个服务之后，浏览器和服务端是通过websocket进行长连接，**
+>
+> **webpack内部实现的watch就会监听文件修改，只要有修改就webpack会重新打包编译到内存中，然后webpack-dev-server依赖中间件webpack-dev-middleware和webpack之间进行交互，**
+>
+> **每次热更新都会请求一个携带hash值的json文件和一个js，websocket传递的也是hash值，内部机制通过hash值检查进行热更新，如果这些模块无法更新，则会刷新页面 至于内部原理，因为水平限制，目前还看不懂。**
+
+
+
 1. webpack 对文件系统进行 watch 打包到内存中
    webpack-dev-middleware 调用 webpack 的 api 对文件系统 watch，当 hello.js 文件发生改变后，webpack 重新对文件进行编译打包，然后保存到内存中。
 
@@ -201,7 +209,7 @@ tree shaking 是一个术语，通常用于描述移除 JavaScript 上下文中�
    webpack-dev-server/client 当接收到 type 为 hash 消息后会将 hash 值暂存起来，当接收到 type 为 ok 的消息后对应用执行 reload 操作。
 
 4. webpack 接收到最新 hash 值验证并请求模块代码
-5. HotModuleReplacement.runtime 对模块进行热更新
+5. d.runtime 对模块进行热更新
    dev-server 先验证是否有更新，没有代码更新的话，重载浏览器。如果在 hotApply 的过程中出现 abort 或者 fail 错误，也进行重载浏览器。
 
 

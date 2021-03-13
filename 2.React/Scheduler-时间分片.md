@@ -12,7 +12,7 @@ WARNING
 
 ## React 时间切片原理
 
-React 时间切片的本质是模拟实现 requestIdleCallback
+React 时间切片的本质是模拟实现 `requestIdleCallback`
 
 下图是浏览器一帧中可以用于执行 JS 的时机
 

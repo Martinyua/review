@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+    /*
+    1.单行文字垂直居中，让块级父元素的line-height等于height即可。
+    2.多行文字垂直居中，块级元素div里面包含行内元素span，形成一个line-box；浏览器渲染时，在行框盒子前渲染一个宽度为0，高度为line-height的空白节点，来撑开div的高度；
+    将span设置为行内块级元素，设置宽高，利用vertical-align：middle和空白节点居中对齐，sapn要设置line-height，否则继承的是父元素的line-height。
+    */
+    .div {
+        height: 300px;
+        width: 300px;
+        line-height: 300px;
+        background-color: green;
+        /* text-align: center; */
+    }
+    .span {
+        background-color: yellow;
+        display: inline-block;
+        /* height: 200px; */
+        width: 100px;
+        line-height: 20px;
+        vertical-align: middle;
+
+    }
+    #father {
+        width: 500px;
+        height: 300px;
+        background-color: skyblue;
+        display: table-cell;
+        vertical-align:middle;
+    }
+ 
+    #son {
+        background-color: green;
+    }
+</style>
+<body>
+    <div class="div">
+        <span class="span">这里是文字这里是文字这里是文字这里是文字这里是文字这里是文字是文字这里是文字这里是文字这里是文字是文字这里是文字这里是文字这里是文字</span>
+    </div>
+
+     
+    <div id="father">
+        <span id="son">我是多行的行内元素我是多行的行内元素我是多行的行内元素我是多行的行内元素我是多行的行内元素我是多行的行内元素我是多行的行内元素我是多行的行内元素</span>
+    </div>
+</body>
+</html>

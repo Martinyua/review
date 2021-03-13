@@ -1,8 +1,8 @@
 /*
  * @Author: Martin
  * @Date: 2021-02-01 18:18:15
- * @LastEditTime: 2021-02-01 19:54:26
- * @FilePath: \undefinedc:\Users\Lenovo\Desktop\Spring recruit review\6.HandWrite\flatten.js
+ * @LastEditTime: 2021-03-03 18:55:46
+ * @FilePath: \reviewc:\Users\Lenovo\Desktop\Spring recruit review\6.HandWrite\flatten.js
  */
 //forEach
 let res = []
@@ -44,3 +44,5 @@ function flatten(arr) {
     }
     return arr
 }
+
+
