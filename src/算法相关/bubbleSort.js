@@ -1,7 +1,7 @@
 /*
  * @Author: Martin
  * @Date: 2020-10-27 22:55:12
- * @LastEditTime: 2021-02-13 08:40:55
+ * @LastEditTime: 2021-03-23 08:58:36
  * @FilePath: \算法相关\bubbleSort.js
  */
 
@@ -18,12 +18,11 @@ Array.prototype.bubble = function () {
     for (let i = 0; i < this.length - 1; i++) {
         for (let j = 0; j < this.length - 1 - i; j++) {
             if (this[j] > this[j + 1]) {
-                let temp = this[j + 1]
-                this[j + 1] = this[j]
-                this[j] = temp
+                [this[j],this[j+1]] = [this[j+1],this[j]]
             }
         }
     }
+    return this
 }
 
 

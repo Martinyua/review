@@ -26,7 +26,7 @@ requestIdleCallback 是在“浏览器重排/重绘”后如果当前帧还有�
 
 最常见的 task 当属 setTimeout 了。但是有个 task 比 setTimeout 执行时机更靠前，那就是 MessageChannel。所以 Scheduler 将需要被执行的回调函数作为 MessageChannel 的回调执行。如果当前宿主环境不支持 MessageChannel，则使用 setTimeout。
 
-在 React 的 render 阶段，开启 Concurrent Mode 时，每次遍历前，都会通过 Scheduler 提供的 shouldYield 方法判断是否需要中断遍历，使浏览器有时间渲染：
+在 React 的 render 阶段，开启 Concurrent Mode 时，每次遍历前，都会通过 `Scheduler` 提供的 `shouldYield` 方法判断是否需要中断遍历，使浏览器有时间渲染：
 
 ```js
 function workLoopConcurrent() {
@@ -37,7 +37,7 @@ function workLoopConcurrent() {
 }
 ```
 
-是否中断的依据，最重要的一点便是每个任务的剩余时间是否用完。在 Schdeduler 中，为任务分配的初始剩余时间为 5ms。
+是否中断的依据，最重要的一点便是每个任务的剩余时间是否用完。在 `Schdeduler` 中，为任务分配的初始剩余时间为 5ms。
 
 ```js
 yieldInterval = 5
@@ -72,7 +72,7 @@ forceFrameRate = function(fps) {
 
 ## 总结
 
-开启 Concurrent Mode 之后，React 就会开启 Time Slicing。会把 reconciler 阶段的 Long task 变成拆分为 5 ms (60fps) 左右的的任务，减小浏览器的卡顿
+开启 Concurrent Mode 之后，React 就会开启 Time Slicing。会把 reconciler 阶段的 Long task 变成拆分为 `5 ms (60fps)` 左右的的任务，减小浏览器的卡顿
 
 
 

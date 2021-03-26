@@ -1,34 +1,31 @@
 /*
  * @Author: Martin
  * @Date: 2021-02-13 08:45:14
- * @LastEditTime: 2021-02-13 10:14:17
+ * @LastEditTime: 2021-03-23 09:46:54
  * @FilePath: \算法相关\插入排序.js
  */
 /**
- * 思路：从第二个数开始往前比，
- * 遇到比它大的数就继续往前比，直到找到比它小的数，就插入到该位置
- * 以此类推进行到最后一个数
+ * 思路：默认 a[0] 为已排序数组中的元素，从 arr[1] 开始逐渐往已排序数组中插入元素，从后往前一个个比较，
+ * 如果待插入元素小于已排序元素，则已排序元素往后移动一位，直到待插入元素找到合适的位置并插入已排序数组。
  * 时间复杂度：O(n^2)
  * 空间复杂度：O(1)
  */
 
-Array.prototype.insertionSort = function () {
-    for (let i = 1; i < this.length; i++) {
-        const temp = this[i];
-        let j = i;
-        while (j > 0) {
-            if (this[j - 1] > temp) {
-                this[j] = this[j - 1] //比它大就继续往前比
-            } else {
-                break //找到比它小的就停止
-            }
-            j -= 1;
-        }
-        this[j] = temp //这个时候的j就是该插入的temp
+ function insertionSort(arr) {
+    for (let i = 1, len = arr.length; i < len; i++) {
+      const temp = arr[i];
+      let preIndex = i - 1;
+  
+      while (arr[preIndex] > temp) {
+        arr[preIndex + 1] = arr[preIndex];
+        preIndex -= 1;
+      }
+      arr[preIndex + 1] = temp;
     }
-    return this
-}
-
+  
+    return arr;
+  }
+  
 Array.prototype.insertionSort = function () {
     for (let i = 1; i < this.length; i++) {
         let temp = this[i]

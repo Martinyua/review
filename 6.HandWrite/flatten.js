@@ -1,8 +1,8 @@
 /*
  * @Author: Martin
  * @Date: 2021-02-01 18:18:15
- * @LastEditTime: 2021-03-03 18:55:46
- * @FilePath: \reviewc:\Users\Lenovo\Desktop\Spring recruit review\6.HandWrite\flatten.js
+ * @LastEditTime: 2021-03-22 10:27:22
+ * @FilePath: \undefinedc:\Users\Lenovo\Desktop\Spring recruit review\6.HandWrite\flatten.js
  */
 //forEach
 let res = []
@@ -45,4 +45,43 @@ function flatten(arr) {
     return arr
 }
 
+let res = []
+const flatten = (arr) => {
+    for (let i = 0; i < arr.length; i++) {
+        let item = arr[i]
+        if (Array.isArray(item)) {
+            flatten(item)
+        } else {
+            res.push(item)
+        }
+    }
+}
 
+let flatten = (arr) => {
+    return arr.reduce((pre, cur) => {
+        return pre.concat(Array.isArray(cur) ? flatten(cur) : cur)
+    }, [])
+}
+
+let flatten = (arr) => {
+    return arr.reduce((pre, cur) => {
+        return pre.concat(Array.isArray(pre) ? flatten(cur) : cur)
+    }, [])
+}
+let res = []
+let flatten = (arr) => {
+    for (let i = 0; i < arr.length; i++) {
+        let item = arr[i]
+        if (Array.isArray(item)) {
+            flatten(item)
+        } else {
+            res.push(item)
+        }
+    }
+}
+
+let flatten = (arr) => {
+    return arr.reduce((pre,cur) => {
+        return pre.concat( Array.isArray(cur) ? flatten(cur) : cur)
+    },[])
+}

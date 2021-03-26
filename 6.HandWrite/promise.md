@@ -1,0 +1,6 @@
+### promise .all 
+
+
+
+### promise.race
+

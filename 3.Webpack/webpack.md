@@ -99,7 +99,7 @@
 
 注意loader的执行顺序是**从后往前**
 
-1. post-css（浏览器兼容，自动添加css前缀），style-loader（把css代码注入到JS中，通过DOM操作来加载this）,css-loader（加载CSS，支持模块化，压缩，文件导入）
+1. post-css（浏览器兼容，自动添加css前缀），style-loader（把css代码注入到JS中，通过DOM操作来加载css）,css-loader（加载CSS，支持模块化，压缩，文件导入）
 2. file-loader,把文件输出到一个文件夹中，**在代码中通过相对URL去引用输出的文件**
 3. image-loader,加载并且压缩图片文件
 4. url-loader(优化)
@@ -142,14 +142,11 @@
 ### 构建速度优化
 
 * 多入口情况下，使用`SplitChunksPlugin `来提取公共代码
-
 * 利用`DllPlugin`和`DllReferencePlugin`预编译资源模块 通过`DllPlugin`来对那些我们引用但是绝对不会修改的npm包来进行预编译，再通过`DllReferencePlugin`将预编译的模块加载进来。
-
 * 使用`Happypack` 实现**多进程**加速编译
-
 * 使用`webpack-uglify-parallel`来提升`uglifyPlugin`的压缩速度。 原理上`webpack-uglify-parallel`采用了多核并行压缩来提升压缩速度
-
 * 使用`Tree-shaking`和`Scope Hoisting`来剔除多余代码
+* thread-loader也可以多线程打包
 
 
 
@@ -199,18 +196,21 @@ tree shaking 是一个术语，通常用于描述移除 JavaScript 上下文中�
 
 
 
-1. webpack 对文件系统进行 watch 打包到内存中
-   webpack-dev-middleware 调用 webpack 的 api 对文件系统 watch，当 hello.js 文件发生改变后，webpack 重新对文件进行编译打包，然后保存到内存中。
+初始化：从配置文件读取与合并参数，然后实例化插件`new Plugin()`
 
-2. devServer 通知浏览器端文件发生改变
-   在启动 devServer 的时候，sockjs 在服务端和浏览器端建立了一个 webSocket 长连接，以便将 webpack 编译和打包的各个阶段状态告知浏览器，最关键的步骤还是 webpack-dev-server 调用 webpack api 监听 compile 的 done 事件，当 compile 完成后，webpack-dev-server 通过 _sendStatus 方法将编译打包后的新模块 hash 值发送到浏览器端。
+开始编译：通过上一步获取的参数，初始化一个`Complier`对象加载插件，执行`Compiler.run`开始编译
 
-3. webpack-dev-server/client 接收到服务端消息做出响应
-   webpack-dev-server/client 当接收到 type 为 hash 消息后会将 hash 值暂存起来，当接收到 type 为 ok 的消息后对应用执行 reload 操作。
+确定入口：根据配置中`entry`找出所有入口文件
 
-4. webpack 接收到最新 hash 值验证并请求模块代码
-5. d.runtime 对模块进行热更新
-   dev-server 先验证是否有更新，没有代码更新的话，重载浏览器。如果在 hotApply 的过程中出现 abort 或者 fail 错误，也进行重载浏览器。
+编译模块：从`entry`出发，调用配置的`loader`，对模块进行转换，同时找出模块依赖的模块，一直递归，一直到找到所有依赖的模块
+
+完成模块编译：这一步已经使用`loader`对所有模块进行了转换，得到了转换后的新内容以及依赖关系
+
+输出资源：根据入口与模块之间的依赖关系，组装成`chunk`代码块，生成文件输出列表
+
+输出成功：根据配置中的输出路径还有文件名，把文件写入系统，完成构建
+
+
 
 
 
@@ -237,3 +237,4 @@ webpack打包流程是一个串行的过程：
 
 [webpack常见面试题](https://juejin.cn/post/6844903877771264013#heading-9)
 
+https://juejin.cn/post/6844904070868631560#heading-2

@@ -10,9 +10,7 @@ Function.prototype.myCall = function (obj = window) {
 Function.prototype.myApply = function (obj = window) {
   obj.fn = this
   const args = arguments[1]
-  let result = args ?
-    obj.fn(...args) :
-    obj.fn()
+  let result = args ? obj.fn(...args) : obj.fn()
   delete obj.fn
   return result
 }

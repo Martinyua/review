@@ -5,8 +5,7 @@
 
 ```
 function create(constructor,...args){
-    const obj = new Object()
-    obj.__proto__=constructor.prototype
+    const obj.prototype = Object.create(constructor.prototype)
     const res = constructor.apply(obj,args)
     return res instanceof Object ? res ： obj
 }

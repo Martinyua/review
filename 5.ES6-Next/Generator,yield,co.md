@@ -1,8 +1,25 @@
 ### Generator/协程/yield/co模块
 
+[参考](https://wangdoc.com/es6/generator-async.html#%E5%BC%82%E6%AD%A5%E4%BB%BB%E5%8A%A1%E7%9A%84%E5%B0%81%E8%A3%85)
+
 #### Generator
 
 简单理解：可以中断的函数 
+
+**Generator 函数可以暂停执行和恢复执行，这是它能封装异步任务的根本原因。除此之外，它还有两个特性，使它可以作为异步编程的完整解决方案：函数体内外的数据交换和错误处理机制。**
+
+```
+function* gen(x) {
+  var y = yield x + 2;
+  return y;
+}
+
+var g = gen(1);
+g.next() // { value: 3, done: false }
+g.next() // { value: undefined, done: true }
+```
+
+**上面代码中，调用 Generator 函数，会返回一个内部指针（即遍历器）`g`。这是 Generator 函数不同于普通函数的另一个地方，即执行它不会返回结果，返回的是指针对象。调用指针`g`的`next`方法，会移动内部指针（即执行异步任务的第一段），指向第一个遇到的`yield`语句，上例是执行到`x + 2`为止。**
 
 Generator函数和普通函数完全**不同**，有其与众不同的独特语法。一个简单的Generator函数就长下面这个样子：
 
@@ -175,3 +192,4 @@ let result3 = Iterator.next()
 - 回调地域问题（嵌套回调）；
 - 处理并行任务棘手（请求之间互不依赖）
 
+https://wangdoc.com/es6/generator-async.html#%E5%BC%82%E6%AD%A5%E4%BB%BB%E5%8A%A1%E7%9A%84%E5%B0%81%E8%A3%85

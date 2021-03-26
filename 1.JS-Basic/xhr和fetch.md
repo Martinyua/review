@@ -12,7 +12,7 @@
   ```
   xhr = new XMLHttpRequest();
   xhr.open('GET',  'data.txt',  true);
-  xhr.send();
+  xhr.sendc();
   xhr.onreadystatechange = function(){
     if(xhr.readyState == 4){
       if(xhr.status == 200){
@@ -24,6 +24,7 @@
       }
     }
   }
+  
   ```
 
 * XHR 的事件监听
@@ -57,7 +58,7 @@ Fetch API提供了一个 `JavaScript` 接口，用于访问和操作HTTP管道�
   * 默认不会带**cookie**，需要添加配置项：fetch(url,{credentials:‘include’})
   * 支持网络请求报错，**也就是说只有网络错误这些导致请求不能完成时他才会调用reject**，而对400，500这种错误它并不会reject。当接收到一个代表错误的 HTTP 状态码时，从 fetch()返回的 Promise 不会被标记为 reject， 即使该 HTTP 响应的状态码是 404 或 500。相反，它会将 Promise 状态标记为 resolve （但是会将 resolve的返回值的 ok 属性设置为 false ），仅当**网络故障时或请求被阻止时**，才会标记为 reject。
   * **不支持abort**
-  * 不能检测原生事情请求进度
+  * **不能**检测原生事情**请求进度**
 
 
 
