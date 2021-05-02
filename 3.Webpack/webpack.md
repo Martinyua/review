@@ -192,7 +192,8 @@ tree shaking 是一个术语，通常用于描述移除 JavaScript 上下文中�
 >
 > **webpack内部实现的watch就会监听文件修改，只要有修改就webpack会重新打包编译到内存中，然后webpack-dev-server依赖中间件webpack-dev-middleware和webpack之间进行交互，**
 >
-> **每次热更新都会请求一个携带hash值的json文件和一个js，websocket传递的也是hash值，内部机制通过hash值检查进行热更新，如果这些模块无法更新，则会刷新页面 至于内部原理，因为水平限制，目前还看不懂。**
+> **每次热更新都会请求一个携带hash值的json文件和一个js，websocket传递的也是hash值，内部机制通过hash值检查进行热更新，如果这些模块无法更新，则会刷新页面 至于内部原理，因为水平限制，目前还看不懂。客户端的websocket监听到有文件改动推送过来的hash戳，会和上一次对比一致则走缓存不一致则通过ajax和jsonp向服务端获取最新资源
+> 使用内存文件系统去替换有修改的内容实现局部刷新**
 
 
 

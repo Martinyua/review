@@ -1,3 +1,9 @@
+<!--
+ * @Author: Martin
+ * @Date: 2021-03-02 18:59:47
+ * @LastEditTime: 2021-03-26 13:34:32
+ * @FilePath: \6.HandWrite\new操作符.md
+-->
 # 1. 模拟new的过程
 
 实现步骤
@@ -43,7 +49,8 @@ const dog = create(Animals, 'dog', 'red')
 
 所以我们可以通过别的方法来改变obj原型的指向，通过`Object.create()`方法来继承
 
-```
+```js
+
 function create(constructor, ...args) {
   const obj = Object.create(constructor.prototype)
   const res = constructor.apply(obj, args)
@@ -52,7 +59,13 @@ function create(constructor, ...args) {
 ```
 
 
-
+```js
+function create(constructor,...args){
+  const obj = Object.create(constructor.prototype)
+  let res = constructor.apply(obj,args)
+  return res instanceOf Object ? res  : obj
+}
+```
 
 
 

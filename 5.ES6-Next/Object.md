@@ -10,5 +10,3 @@ let newobj=Object.entries(obj)
 console.log(newobj)//[["name", "小白"],["age", 18],["sex", "男"]]
 ```
 
-### 
-

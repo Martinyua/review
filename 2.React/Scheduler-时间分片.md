@@ -20,11 +20,11 @@ React 时间切片的本质是模拟实现 `requestIdleCallback`
 一个task(宏任务) -- 队列中全部job(微任务) -- requestAnimationFrame -- 浏览器重排/重绘 -- requestIdleCallback
 ```
 
-requestIdleCallback 是在“浏览器重排/重绘”后如果当前帧还有空余时间时被调用的。
+`requestIdleCallback` 是在“浏览器重排/重绘”后如果当前帧还有空余时间时被调用的。
 
 浏览器并没有提供其他 API 能够在同样的时机（浏览器重排/重绘后）调用以模拟其实现。
 
-最常见的 task 当属 setTimeout 了。但是有个 task 比 setTimeout 执行时机更靠前，那就是 MessageChannel。所以 Scheduler 将需要被执行的回调函数作为 MessageChannel 的回调执行。如果当前宿主环境不支持 MessageChannel，则使用 setTimeout。
+最常见的 task 当属 `setTimeout` 了。但是有个 task 比 `setTimeout` 执行时机更靠前，那就是 `MessageChannel`。所以 Scheduler 将需要被执行的回调函数作为 `MessageChannel` 的回调执行。如果当前宿主环境不支持 `MessageChannel`，则使用 `setTimeout`。
 
 在 React 的 render 阶段，开启 Concurrent Mode 时，每次遍历前，都会通过 `Scheduler` 提供的 `shouldYield` 方法判断是否需要中断遍历，使浏览器有时间渲染：
 
